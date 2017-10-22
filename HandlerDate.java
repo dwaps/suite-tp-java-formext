@@ -36,7 +36,7 @@ public class HandlerDate {
 	}
 	
 	private void searchMonth() {
-		int cpt31Days = 0, cpt30Days = 0;
+		int cpt31Days = 1, cpt30Days = 0;
 		final boolean[] is30DaysMonth = {
 			false, // Janvier
 			true, // Février (30-1 !!!)
@@ -51,21 +51,22 @@ public class HandlerDate {
 			true, // Novembre
 			false // Décembre
 		};
-
-		// SIMULATION DES TOURS DE BOUCLES
-		// 1er tour de boucle : test sur 31 jours seulement
-		if (nbOfDay <= MONTH_31DAYS*(is30DaysMonth[0] ? cpt31Days : ++cpt31Days)) month = 1;
-		// A partir de 3ème tour de boucle : test avec irrégularité du mois de février pris en compte
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[1] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[1] ? ++cpt30Days : cpt30Days)-1)) month = 2;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[2] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[2] ? ++cpt30Days : cpt30Days)-1)) month = 3;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[3] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[3] ? ++cpt30Days : cpt30Days)-1)) month = 4;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[4] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[4] ? ++cpt30Days : cpt30Days)-1)) month = 5;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[5] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[5] ? ++cpt30Days : cpt30Days)-1)) month = 6;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[6] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[6] ? ++cpt30Days : cpt30Days)-1)) month = 7;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[7] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[7] ? ++cpt30Days : cpt30Days)-1)) month = 8;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[8] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[8] ? ++cpt30Days : cpt30Days)-1)) month = 9;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[9] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[9] ? ++cpt30Days : cpt30Days)-1)) month = 10;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[10] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[10] ? ++cpt30Days : cpt30Days)-1)) month = 11;
-		else if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[11] ? cpt31Days : ++cpt31Days) + 	MONTH_30DAYS*(is30DaysMonth[11] ? ++cpt30Days : cpt30Days)-1)) month = 12;
+		
+		stop : for (int i = 0; i < is30DaysMonth.length; i++) {
+			switch (i) {
+				case 0:
+					// Si l'utilisateur a saisi 1..31, le jour appartient au mois de janvier
+					if (nbOfDay <= MONTH_31DAYS) { // Simplification de la condition : l'incrémentation de cpt31Days --> 1 à l'initialisation
+						month = 1;
+						break stop;
+					}
+					break;
+				default:
+					if (nbOfDay <= (MONTH_31DAYS*(is30DaysMonth[i] ? cpt31Days : ++cpt31Days) + MONTH_30DAYS*(is30DaysMonth[i] ? ++cpt30Days : cpt30Days)-1)) {
+						month = i+1;
+						break stop;
+					}
+			}
+		}
 	}
 }
