@@ -9,7 +9,7 @@ public class PremiereClasse {
 		boolean run = true;
 		
 		while (run) {
-			handlerDate.selectMonth(sc);
+			handlerDate.displayDate(sc);
 			
 			System.out.print("Voulez-vous recommencer [On] ? ");
 			sc.nextLine();

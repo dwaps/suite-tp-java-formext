@@ -2,18 +2,20 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HandlerDate {
-	final int MONTH_31DAYS = 31;
-	final int MONTH_30DAYS = 30;
+	private final int ARRAY_OF_MONTHS = 0;
+	private final int ARRAY_OF_DAYS = 1;
+	private final int MONTH_31DAYS = 31;
+	private final int MONTH_30DAYS = 30;
 	
 	String datesBuilder[][] = {
 		{ "", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre" },
 		{ "", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" }
 	};
 	
-	int nbOfDay = 0, month = 0;
+	int nbOfDay = 0, month = 0, day = 0;
 			
-	void selectMonth(Scanner scanner) {
-		System.out.print("Choisir un nombre pour obtenir le mois du jour correspondant [1-365] : ");
+	public void displayDate(Scanner scanner) {
+		System.out.print("Choisir un numéro de jour de l'année [1-365] : ");
 		
 		try {
 			nbOfDay = scanner.nextInt();
@@ -21,8 +23,11 @@ public class HandlerDate {
 			if (nbOfDay >= 1 && nbOfDay <= 366) {
 				
 				searchMonth();
+				searchDay();
 				
-				System.out.println(datesBuilder[0][month]);
+				System.out.println("Le " + nbOfDay + "ème jour correspond à un "
+					+ datesBuilder[ARRAY_OF_DAYS][day] 
+					+ " du mois de " + datesBuilder[ARRAY_OF_MONTHS][month]);
 			} else {
 				System.out.println("La valeur saisie n'est pas correcte...");
 			}
@@ -68,5 +73,10 @@ public class HandlerDate {
 					}
 			}
 		}
+	}
+	
+	private void searchDay() {
+		int result = nbOfDay % 7;
+		day = result != 0 ? result : 7;
 	}
 }
