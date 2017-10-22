@@ -19,21 +19,28 @@ public class HandlerDate {
 		
 		try {
 			nbOfDay = scanner.nextInt();
-
-			if (nbOfDay <= MONTH_31DAYS*1) month = 1;
-			else if (nbOfDay <= (MONTH_31DAYS*1 + MONTH_30DAYS*1-1)) month = 2;
-			else if (nbOfDay <= (MONTH_31DAYS*2 + MONTH_30DAYS*1-1)) month = 3;
-			else if (nbOfDay <= (MONTH_31DAYS*2 + MONTH_30DAYS*2-1)) month = 4;
-			else if (nbOfDay <= (MONTH_31DAYS*3 + MONTH_30DAYS*2-1)) month = 5;
-			else if (nbOfDay <= (MONTH_31DAYS*3 + MONTH_30DAYS*3-1)) month = 6;
-			else if (nbOfDay <= (MONTH_31DAYS*4 + MONTH_30DAYS*3-1)) month = 7;
-			else if (nbOfDay <= (MONTH_31DAYS*5 + MONTH_30DAYS*3-1)) month = 8;
-			else if (nbOfDay <= (MONTH_31DAYS*5 + MONTH_30DAYS*4-1)) month = 9;
-			else if (nbOfDay <= (MONTH_31DAYS*6 + MONTH_30DAYS*4-1)) month = 10;
-			else if (nbOfDay <= (MONTH_31DAYS*6 + MONTH_30DAYS*5-1)) month = 11;
-			else if (nbOfDay <= (MONTH_31DAYS*7 + MONTH_30DAYS*5-1)) month = 12;
 			
-			System.out.println(datesBuilder[0][month]);
+			if (nbOfDay >= 1 && nbOfDay <= 366) {
+				if (nbOfDay <= MONTH_31DAYS*1) month = 1;
+				else if (nbOfDay <= (MONTH_31DAYS*1 + MONTH_30DAYS*1-1)) month = 2;
+				else if (nbOfDay <= (MONTH_31DAYS*2 + MONTH_30DAYS*1-1)) month = 3;
+				else if (nbOfDay <= (MONTH_31DAYS*2 + MONTH_30DAYS*2-1)) month = 4;
+				else if (nbOfDay <= (MONTH_31DAYS*3 + MONTH_30DAYS*2-1)) month = 5;
+				else if (nbOfDay <= (MONTH_31DAYS*3 + MONTH_30DAYS*3-1)) month = 6;
+				else if (nbOfDay <= (MONTH_31DAYS*4 + MONTH_30DAYS*3-1)) month = 7;
+				else if (nbOfDay <= (MONTH_31DAYS*5 + MONTH_30DAYS*3-1)) month = 8;
+				else if (nbOfDay <= (MONTH_31DAYS*5 + MONTH_30DAYS*4-1)) month = 9;
+				else if (nbOfDay <= (MONTH_31DAYS*6 + MONTH_30DAYS*4-1)) month = 10;
+				else if (nbOfDay <= (MONTH_31DAYS*6 + MONTH_30DAYS*5-1)) month = 11;
+				else if (nbOfDay <= (MONTH_31DAYS*7 + MONTH_30DAYS*5-1)) month = 12;
+				
+				System.out.println(datesBuilder[0][month]);
+			} else {
+				System.out.println("La valeur saisie n'est pas correcte...");
+			}
+			
+			nbOfDay = 0;
+			month = 0;
 			
 		} catch (InputMismatchException e) {
 			System.out.println("La saisie n'a pa pu être récupérée...");
