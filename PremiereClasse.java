@@ -9,6 +9,7 @@ public class PremiereClasse {
 		boolean run = true;
 		
 		while (run) {
+//			handlerDate.ACTIVE_DEBUG_MODE = true;	
 			handlerDate.displayDate(sc);
 			
 			System.out.print("Voulez-vous recommencer [On] ? ");
