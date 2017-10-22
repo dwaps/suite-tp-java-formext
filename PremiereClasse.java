@@ -12,6 +12,7 @@ public class PremiereClasse {
 			handlerDate.selectMonth(sc);
 			
 			System.out.print("Voulez-vous recommencer [On] ? ");
+			sc.nextLine();
 			String userResponse = sc.nextLine();
 			
 			if (userResponse.equals("n")) {
