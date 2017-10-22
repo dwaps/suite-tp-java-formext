@@ -10,29 +10,17 @@ public class HandlerDate {
 		{ "", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche" }
 	};
 	
-	int nbOfDay = 0;
+	int nbOfDay = 0, month = 0;
 			
 	void selectMonth(Scanner scanner) {
-		int month = 0;
-		
 		System.out.print("Choisir un nombre pour obtenir le mois du jour correspondant [1-365] : ");
 		
 		try {
 			nbOfDay = scanner.nextInt();
 			
 			if (nbOfDay >= 1 && nbOfDay <= 366) {
-				if (nbOfDay <= MONTH_31DAYS*1) month = 1;
-				else if (nbOfDay <= (MONTH_31DAYS*1 + MONTH_30DAYS*1-1)) month = 2;
-				else if (nbOfDay <= (MONTH_31DAYS*2 + MONTH_30DAYS*1-1)) month = 3;
-				else if (nbOfDay <= (MONTH_31DAYS*2 + MONTH_30DAYS*2-1)) month = 4;
-				else if (nbOfDay <= (MONTH_31DAYS*3 + MONTH_30DAYS*2-1)) month = 5;
-				else if (nbOfDay <= (MONTH_31DAYS*3 + MONTH_30DAYS*3-1)) month = 6;
-				else if (nbOfDay <= (MONTH_31DAYS*4 + MONTH_30DAYS*3-1)) month = 7;
-				else if (nbOfDay <= (MONTH_31DAYS*5 + MONTH_30DAYS*3-1)) month = 8;
-				else if (nbOfDay <= (MONTH_31DAYS*5 + MONTH_30DAYS*4-1)) month = 9;
-				else if (nbOfDay <= (MONTH_31DAYS*6 + MONTH_30DAYS*4-1)) month = 10;
-				else if (nbOfDay <= (MONTH_31DAYS*6 + MONTH_30DAYS*5-1)) month = 11;
-				else if (nbOfDay <= (MONTH_31DAYS*7 + MONTH_30DAYS*5-1)) month = 12;
+				
+				searchMonth();
 				
 				System.out.println(datesBuilder[0][month]);
 			} else {
@@ -44,8 +32,27 @@ public class HandlerDate {
 			
 		} catch (InputMismatchException e) {
 			System.out.println("La saisie n'a pa pu être récupérée...");
-			
 		}
-
+	}
+	
+	private void searchMonth() {
+		int cpt31Days = 1, cpt30Days = 1;
+		
+		if (nbOfDay <= MONTH_31DAYS) month = 1;
+		
+		// Incrémentation ?
+		// cpt31Days => NON OUI NON OUI NON OUI OUI NON OUI NON OUI
+		// cpt30Days => NON NON OUI NON OUI NON NON OUI NON OUI NON
+		else if (nbOfDay <= (MONTH_31DAYS*cpt31Days + 		MONTH_30DAYS*cpt30Days-1)) month = 2;
+		else if (nbOfDay <= (MONTH_31DAYS*(++cpt31Days) + 	MONTH_30DAYS*cpt30Days-1)) month = 3;
+		else if (nbOfDay <= (MONTH_31DAYS*cpt31Days + 		MONTH_30DAYS*(++cpt30Days)-1)) month = 4;
+		else if (nbOfDay <= (MONTH_31DAYS*(++cpt31Days) + 	MONTH_30DAYS*cpt30Days-1)) month = 5;
+		else if (nbOfDay <= (MONTH_31DAYS*cpt31Days + 		MONTH_30DAYS*(++cpt30Days)-1)) month = 6;
+		else if (nbOfDay <= (MONTH_31DAYS*(++cpt31Days) + 	MONTH_30DAYS*cpt30Days-1)) month = 7;
+		else if (nbOfDay <= (MONTH_31DAYS*(++cpt31Days) + 	MONTH_30DAYS*cpt30Days-1)) month = 8;
+		else if (nbOfDay <= (MONTH_31DAYS*cpt31Days + 		MONTH_30DAYS*(++cpt30Days)-1)) month = 9;
+		else if (nbOfDay <= (MONTH_31DAYS*(++cpt31Days) + 	MONTH_30DAYS*cpt30Days-1)) month = 10;
+		else if (nbOfDay <= (MONTH_31DAYS*cpt31Days + 		MONTH_30DAYS*(++cpt30Days)-1)) month = 11;
+		else if (nbOfDay <= (MONTH_31DAYS*(++cpt31Days) + 	MONTH_30DAYS*cpt30Days-1)) month = 12;
 	}
 }
